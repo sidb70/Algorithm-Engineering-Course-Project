@@ -82,6 +82,7 @@ def measure_times(function,sizes):
     :param function: Function to measure
     :param sizes: Dictionary mapping size of input to list of run times
     """
+     # 
     random.seed(0)
     for size in sizes.keys():
         arr = [random.randint(0, 1000) for _ in range(size)]
