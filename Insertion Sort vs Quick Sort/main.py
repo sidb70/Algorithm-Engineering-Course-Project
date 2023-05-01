@@ -3,7 +3,7 @@ import random
 import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
-# A hybrid quicksort would be even faster, but we don't want to give too much code away here!
+
 def quicksort(data):
     """
     https://github.com/sidb70/CSE-331/blob/main/Projects/Project%204%20Sorting%20algorithms/solution.py
@@ -52,13 +52,11 @@ def quicksort(data):
                 left += 1
             while left <= right and data[right] > pivot:
                 right -= 1
-
             # Swap, but only if pointers haven't crossed
             if left <= right:
                 data[left], data[right] = data[right], data[left]
                 left += 1
                 right -= 1
-
         quicksort_inner(first, left - 1)
         quicksort_inner(left, last)
 
@@ -86,8 +84,8 @@ def measure_times(function,sizes):
     """
     random.seed(0)
     for size in sizes.keys():
-        start = time.time()
         arr = [random.randint(0, 1000) for _ in range(size)]
+        start = time.time()
         function(arr)
         end = time.time()
         sizes[size].append((end - start)/size)
