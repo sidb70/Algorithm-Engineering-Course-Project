@@ -116,7 +116,7 @@ if __name__ == '__main__':
     # Create a seaborn swarmplot
     sns.swarmplot(x='n', y='Time per element', hue='Algorithm', data=df,size=1)
     plt.legend(title='Algorithm', loc='upper left')
-    plt.xlabel('n')
+    plt.xlabel('input size, n')
     plt.ylabel('Run Time per element (microseconds)')
     plt.title('Comparison of Insertion Sort and Quick Sort Run Times')
     plt.savefig('insertion_vs_quick.png')
