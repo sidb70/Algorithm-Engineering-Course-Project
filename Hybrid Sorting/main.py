@@ -117,6 +117,7 @@ if __name__ == '__main__':
     df = df.melt(id_vars=['index'], value_vars=[10,15,20,30,40,50,100,200])
     df.columns = ['k', 'n', 'time/element']
     sns.lineplot(data=df, x='n', y='time/element', hue='k')
+    plt.savefig('hybrid_sort.png')
     plt.show()
 
     

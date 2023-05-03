@@ -119,4 +119,5 @@ if __name__ == '__main__':
     plt.xlabel('n')
     plt.ylabel('Run Time per element (microseconds)')
     plt.title('Comparison of Insertion Sort and Quick Sort Run Times')
+    plt.savefig('insertion_vs_quick.png')
     plt.show()
