@@ -90,15 +90,16 @@ def measure_hybrid_sort(k, runtimes):
      # 
     random.seed(0)
     for size in runtimes[k].keys():
-        arr = [random.randint(0, 1000) for _ in range(size)]
-        start = time.time()
-        quicksort_hybrid(arr,k)
-        end = time.time()
-        runtimes[k][size].append((end - start)/size)
+        for _ in range(10):
+            arr = [random.randint(0, 1000) for _ in range(size)]
+            start = time.time()
+            quicksort_hybrid(arr,k)
+            end = time.time()
+            runtimes[k][size].append((end - start)/size)
 if __name__ == '__main__':
     hybrid_sort_runtimes = {}
     for i in range(5,21):
-        hybrid_sort_runtimes[i*5] = {10:[],15:[],20:[],30:[], 40:[], 50: [],100:[],200:[]}
+        hybrid_sort_runtimes[i*5] = {20:[], 30:[], 50:[], 100:[], 200:[]}
     for k in hybrid_sort_runtimes.keys():
         measure_hybrid_sort(k, hybrid_sort_runtimes)
         #print results for each k
@@ -107,14 +108,18 @@ if __name__ == '__main__':
             print("n = ", size, "average time/element = ", sum(hybrid_sort_runtimes[k][size])/len(hybrid_sort_runtimes[k][size]))
 
 
-    #plot results
+    
+    # Average results
     for k in hybrid_sort_runtimes.keys():
         for size in hybrid_sort_runtimes[k].keys():
+            # Average the 10 run times for each size
             hybrid_sort_runtimes[k][size] = sum(hybrid_sort_runtimes[k][size])/len(hybrid_sort_runtimes[k][size])
+
+    # Plot results
     df = pd.DataFrame(hybrid_sort_runtimes)
     df = df.transpose()
     df = df.reset_index()
-    df = df.melt(id_vars=['index'], value_vars=[10,15,20,30,40,50,100,200])
+    df = df.melt(id_vars=['index'], value_vars=[20,30,50,100,200])
     df.columns = ['k', 'n', 'time/element']
     sns.lineplot(data=df, x='n', y='time/element', hue='k')
     plt.title('Comparison of run time performance of hybrid sort based on k values')
