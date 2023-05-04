@@ -1,3 +1,7 @@
+"""
+sortedcontainers.sortedlist source code:
+https://grantjenks.com/docs/sortedcontainers/sortedlist.html
+"""
 import sortedcontainers.sortedlist as sortedlist
 import time
 import random
