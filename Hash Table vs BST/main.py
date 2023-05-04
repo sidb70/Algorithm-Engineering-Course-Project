@@ -17,7 +17,7 @@ def measure_times(datastructure, dataset):
     random.seed(0)
     n = 10
     while True:
-        arr = [random.randint(0, 1000) for _ in range(n)]
+        arr = [random.randint(0, n) for _ in range(n)]
         if dataset.get(n) == None:
             dataset[n] = []
         if type(datastructure) == dict:
@@ -32,12 +32,13 @@ def measure_times(datastructure, dataset):
                 datastructure.add(i)
             end = time.time()
             dataset[n].append((end - start) / n)
-        n *=10
-        if n > 5000:
+        n = n**2
+        if end - start >=3:
+            print(type(datastructure),"  n: ",n)
             break
             
         # print result
-        print(type(datastructure),"  Data Set: ",dataset)
+        #print(type(datastructure),"  Data Set: ",dataset)
 
 if __name__ == "__main__":
     hashtable = {}
@@ -46,6 +47,27 @@ if __name__ == "__main__":
     hashtable_times = {}
     multiset_times = {}
 
-    for i in range(20):
+    for i in range(10):
         measure_times(hashtable, hashtable_times)
         measure_times(multiset, multiset_times)
+
+    # Plot results
+    df = pd.DataFrame.from_dict(hashtable_times, orient='index')
+    df = df.transpose()
+    df = df.melt(var_name='n', value_name='time')
+    df['n'] = df['n'].astype(int)
+    df['time'] = df['time'].astype(float)
+    sns.lineplot(x='n', y='time', data=df)
+    plt.title('Hash Table Insertion Time')
+    plt.savefig('hashtable.png')
+    plt.clf()
+
+    df = pd.DataFrame.from_dict(multiset_times, orient='index')
+    df = df.transpose()
+    df = df.melt(var_name='n', value_name='time')
+    df['n'] = df['n'].astype(int)
+    df['time'] = df['time'].astype(float)
+    sns.lineplot(x='n', y='time', data=df)
+    plt.title('Binary Search Tree Insertion Time ')
+    plt.savefig('bst.png')
+    plt.clf()
