@@ -32,12 +32,12 @@ def measure_times(datastructure, dataset):
                 datastructure.add(i)
             end = time.time()
             dataset[n].append((end - start) / n)
-        n = n**2
-        if end - start >=3:
+        n *=10
+        if n > 5000:
             break
             
         # print result
-        print(dataset)
+        print(type(datastructure),"  Data Set: ",dataset)
 
 if __name__ == "__main__":
     hashtable = {}
