@@ -41,7 +41,7 @@ def measure_times(datastructure, dataset):
             for i in arr:
                 datastructure.add(i)
             end = time.time()
-            dataset[n].append((end - start) / n)
+            dataset[n].append((end - start))
         # Increase size of input
         n = n*10
     print(type(datastructure),"  n: ",n)
