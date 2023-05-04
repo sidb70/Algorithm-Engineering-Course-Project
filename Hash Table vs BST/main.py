@@ -12,45 +12,53 @@ def measure_times(datastructure, dataset):
     :param datastructure: Data structure to measure
     :param dataset: Dictionary mapping size of input to list of run times
     """
+    
     start = 0
     end = 0
     random.seed(0)
     n = 10
-    while True:
+    while end - start < 3:
+        # Generate random array of size n
         arr = [random.randint(0, n) for _ in range(n)]
+        
         if dataset.get(n) == None:
             dataset[n] = []
+        
+        # Measure run time if data structure is a dictionary
         if type(datastructure) == dict:
             start = time.time()
             for i in arr:
                 datastructure[i] = i
             end = time.time()
             dataset[n].append((end - start) / n) # Average time per element
+        # Measure run time if data structure is a sorted list
         else:
             start = time.time()
             for i in arr:
                 datastructure.add(i)
             end = time.time()
             dataset[n].append((end - start) / n)
-        n = n**2
-        if end - start >=3:
-            print(type(datastructure),"  n: ",n)
-            break
+        # Increase size of input
+        n = n*10
+    print(type(datastructure),"  n: ",n)
             
-        # print result
-        #print(type(datastructure),"  Data Set: ",dataset)
 
 if __name__ == "__main__":
+    # Data structures
     hashtable = {}
     multiset = sortedlist.SortedList()
 
+    # Dictionary mapping size of input to list of run times
     hashtable_times = {}
     multiset_times = {}
 
     for i in range(10):
+        # Measure run times
         measure_times(hashtable, hashtable_times)
-        hashtable = {}
         measure_times(multiset, multiset_times)
+
+        # Reset data structures
+        hashtable = {}
         multiset = sortedlist.SortedList()
 
     # Plot results
