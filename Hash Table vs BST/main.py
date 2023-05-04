@@ -20,8 +20,10 @@ def measure_times(datastructure, dataset):
     start = 0
     end = 0
     random.seed(0)
-    n = 10
+    n = 1
     while end - start < 3:
+        # Increase size of input
+        n = n*10
         # Generate random array of size n
         arr = [random.randint(0, n) for _ in range(n)]
         
@@ -34,16 +36,14 @@ def measure_times(datastructure, dataset):
             for i in arr:
                 datastructure[i] = i
             end = time.time()
-            dataset[n].append((end - start) ) # Average time per element
+            dataset[n].append(end - start)  # Average time per element
         # Measure run time if data structure is a sorted list
         else:
             start = time.time()
             for i in arr:
                 datastructure.add(i)
             end = time.time()
-            dataset[n].append((end - start))
-        # Increase size of input
-        n = n*10
+            dataset[n].append(end - start)
     print(type(datastructure),"  n: ",n)
             
 
