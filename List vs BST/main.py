@@ -36,7 +36,7 @@ def measure_times(datastructure, dataset):
                 datastructure.add(i)
             end = time.time()
             # Store run time
-            dataset[n].append(end - start)
+            dataset[n].append((end - start)/n)
 
         # Measure run time if data structure is a vector
         else:
@@ -58,7 +58,7 @@ def measure_times(datastructure, dataset):
                 datastructure.insert(mid, i)
             end = time.time()
             # Store run time
-            dataset[n].append(end - start)
+            dataset[n].append((end - start)/n)
 
 
     print(type(datastructure),"  n: ",n)
@@ -90,6 +90,7 @@ if __name__ == "__main__":
     df['time'] = df['time'].astype(float)
     sns.lineplot(x='n', y='time', data=df)
     plt.title('Vector with Binary Search Insertion Time')
+    plt.ylabel('Time (s)')
     plt.savefig('vector_insertion.png')
     plt.clf()
 
