@@ -12,9 +12,9 @@ import matplotlib.pyplot as plt
 
 def measure_times(datastructure, dataset):
     """
-    Measures the run time of a function for different sizes of input
+    Measures the run time of a function for different sizes of input and stores the results in a dictionary.
     :param datastructure: Data structure to measure
-    :param dataset: Dictionary mapping size of input to list of run times
+    :param dataset: Dictionary mapping size of input to list of run times 
     """
     
     start = 0
