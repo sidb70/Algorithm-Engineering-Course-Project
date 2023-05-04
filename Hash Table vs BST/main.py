@@ -34,7 +34,7 @@ def measure_times(datastructure, dataset):
             for i in arr:
                 datastructure[i] = i
             end = time.time()
-            dataset[n].append((end - start) / n) # Average time per element
+            dataset[n].append((end - start) ) # Average time per element
         # Measure run time if data structure is a sorted list
         else:
             start = time.time()
