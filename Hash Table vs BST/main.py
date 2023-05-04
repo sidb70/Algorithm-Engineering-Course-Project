@@ -49,7 +49,9 @@ if __name__ == "__main__":
 
     for i in range(10):
         measure_times(hashtable, hashtable_times)
+        hashtable = {}
         measure_times(multiset, multiset_times)
+        multiset = sortedlist.SortedList()
 
     # Plot results
     df = pd.DataFrame.from_dict(hashtable_times, orient='index')
@@ -59,7 +61,7 @@ if __name__ == "__main__":
     df['time'] = df['time'].astype(float)
     sns.lineplot(x='n', y='time', data=df)
     plt.title('Hash Table Insertion Time')
-    plt.savefig('hashtable.png')
+    plt.savefig('ht.png')
     plt.clf()
 
     df = pd.DataFrame.from_dict(multiset_times, orient='index')
@@ -69,5 +71,5 @@ if __name__ == "__main__":
     df['time'] = df['time'].astype(float)
     sns.lineplot(x='n', y='time', data=df)
     plt.title('Binary Search Tree Insertion Time ')
-    plt.savefig('bst.png')
+    plt.savefig('bt.png')
     plt.clf()
